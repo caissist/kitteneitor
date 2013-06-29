@@ -7,6 +7,7 @@
 #include "defs.h"
 #include "data.h"
 #include "protos.h"
+#include <inttypes.h>    // belka
 
 void startgame()
 {
@@ -803,6 +804,8 @@ int main()
     MOVE theBest;
     int movecnt;
 
+
+        /* belka
     puts ("Kitteneitor, by Emilio Diaz");
     puts (" Help");
     puts (" d: display board");
@@ -811,6 +814,15 @@ int main()
     puts (" quit: exit");
     puts (" sd n: set engine depth to n plies");
     puts (" undo: take back last move");
+    */
+    puts (" \n Kitteneitor version June 27th 2013 by Emilio Diaz \n =================================================\n\n");
+    puts (" Help overview:");
+    puts (" making a move: e.g. e2e4, c7c5, a7a8q, e1g1 etc.");
+    puts (" d ............ displaying current board");
+    puts (" on ........... forcing the engine to move");
+    puts (" sd <n> ....... setting depth to <n> plies");
+    puts (" undo ......... taking back last move (ply)");
+    puts (" quit ......... quit console application \n\n");
 
     side = WHITE;
     computer_side = BLACK;	/* Human is white side */
