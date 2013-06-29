@@ -7,6 +7,7 @@
 #include "defs.h"
 #include "data.h"
 #include "protos.h"
+#include <inttypes.h>    // belka
 
 void startgame()
 {
@@ -803,14 +804,15 @@ int main()
     MOVE theBest;
     int movecnt;
 
-    puts ("Kitteneitor, by Emilio Diaz");
-    puts (" Help");
-    puts (" d: display board");
-    puts (" MOVE: make a move (e.g. b1c3, a7a8q, e1g1)");
-    puts (" on: force computer to move");
-    puts (" quit: exit");
-    puts (" sd n: set engine depth to n plies");
-    puts (" undo: take back last move");
+
+    puts (" \n Kitteneitor version June 27th 2013 by Emilio Diaz \n =================================================\n\n");
+    puts (" Help overview:");
+    puts (" making a move: e.g. e2e4, c7c5, a7a8q, e1g1 etc.");
+    puts (" d ............ displaying current board");
+    puts (" on ........... forcing the engine to move");
+    puts (" sd <n> ....... setting depth to <n> plies");
+    puts (" undo ......... taking back last move (ply)");
+    puts (" quit ......... quit console application \n\n");
 
     side = WHITE;
     computer_side = BLACK;	/* Human is white side */
@@ -1052,8 +1054,22 @@ int main()
             /* Stop timer */
             stop = clock ();
             t = (double) (stop - start) / CLOCKS_PER_SEC;
-            printf ("nodes = %'llu\n", count);
-            printf ("time = %'.2f s\n", t);
+
+            /* belka:
+    		That is because %llu doesn't work properly under Windows. 
+			I suggest using PRIu64 instead and you'll find it's portable to Linux 
+			as well.
+			You may want to try using the inttypes.h library that gives you types 
+			such as int32_t, int64_t, uint64_t etc. You can then use its macros such as: 
+			uint64_t x;
+			uint32_t y;
+			printf("x: %"PRId64", y: %"PRId32"\n", x, y);
+			*/
+            // In Linux it is %llu and in Windows it is %I64u
+            //printf ("nodes = %llu\n", count);
+            printf ("nodes = %I64u\n", count);
+            //printf ("time = %'.2f s\n", t);
+            printf ("time = %.2f s\n", t);	// belka
             continue;
         }
         if (!strcmp (s, "quit"))
